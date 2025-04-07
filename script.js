@@ -64,16 +64,54 @@ function renderBooks(bookArray) {
 
 function renderPagination() {
   pagination.innerHTML = "";
-  for (let i = 1; i <= totalPages; i++) {
+  const maxVisible = 10;
+  const addButton = (text, page, isCurrent = false, isDisabled = false) => {
     const btn = document.createElement("button");
-    btn.textContent = i;
-    if (i === currentPage) btn.style.backgroundColor = "#555";
+    btn.textContent = text;
+    btn.disabled = isDisabled;
+    if (isCurrent) btn.style.backgroundColor = "#555";
     btn.onclick = () => {
-      currentPage = i;
+      currentPage = page;
       fetchBooks(currentPage);
     };
     pagination.appendChild(btn);
+  };
+
+  addButton("⟨", currentPage - 1, false, currentPage === 1);
+
+  if (totalPages <= maxVisible + 3) {
+    for (let i = 1; i <= totalPages; i++) {
+      addButton(i, i, i === currentPage);
+    }
+  } else {
+    let startPage = Math.max(2, currentPage - 2);
+    let endPage = Math.min(totalPages - 1, currentPage + 2);
+
+    addButton(1, 1, currentPage === 1);
+
+    if (startPage > 2) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      ellipsis.style.padding = "0 5px";
+      pagination.appendChild(ellipsis);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      addButton(i, i, i === currentPage);
+    }
+
+    if (endPage < totalPages - 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      ellipsis.style.padding = "0 5px";
+      pagination.appendChild(ellipsis);
+    }
+
+    addButton(totalPages - 1, totalPages - 1, currentPage === totalPages - 1);
+    addButton(totalPages, totalPages, currentPage === totalPages);
   }
+
+  addButton("⟩", currentPage + 1, false, currentPage === totalPages);
 }
 
 function toggleWishlist(book) {
