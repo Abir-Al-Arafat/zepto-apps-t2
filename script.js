@@ -124,5 +124,13 @@ function populateGenres() {
   });
 }
 
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase();
+  const filtered = books.filter((book) =>
+    book.title.toLowerCase().includes(value)
+  );
+  renderBooks(filtered);
+});
+
 // Init
 fetchBooks();
