@@ -140,5 +140,16 @@ genreFilter.addEventListener("change", () => {
   renderBooks(filtered);
 });
 
+homeLink.addEventListener("click", () => {
+  wishlistPage.classList.add("hidden");
+  bookList.parentElement.classList.remove("hidden");
+});
+
+wishlistLink.addEventListener("click", () => {
+  wishlistPage.classList.remove("hidden");
+  bookList.parentElement.classList.add("hidden");
+  renderWishlist();
+});
+
 // Init
 fetchBooks();
