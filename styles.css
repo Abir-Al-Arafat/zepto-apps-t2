@@ -27,7 +27,7 @@ nav ul li a {
 }
 
 .container {
-  padding: 1rem;
+  padding: 1rem 10rem;
 }
 
 .filters {
@@ -44,7 +44,7 @@ nav ul li a {
 
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1rem;
 }
 
@@ -61,6 +61,7 @@ nav ul li a {
 
 .book-card:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 
 .book-card img {
