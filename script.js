@@ -24,5 +24,43 @@ async function fetchBooks(page = 1) {
   populateGenres();
 }
 
+function renderBooks(bookArray) {
+  bookList.innerHTML = "";
+  bookArray.forEach((book) => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+
+    const image = document.createElement("img");
+    image.src = book.formats["image/jpeg"];
+    image.alt = book.title;
+
+    const title = document.createElement("div");
+    title.className = "book-title";
+    title.textContent = book.title;
+
+    const author = document.createElement("div");
+    author.className = "book-author";
+    author.textContent = `Author: ${book.authors[0]?.name || "Unknown"}`;
+
+    const genre = document.createElement("div");
+    genre.className = "book-genre";
+    genre.textContent = `Genre: ${book.subjects[0] || "N/A"}`;
+
+    const id = document.createElement("div");
+    id.className = "book-id";
+    id.textContent = `ID: ${book.id}`;
+
+    const wishlistIcon = document.createElement("span");
+    wishlistIcon.className = "wishlist-icon";
+    wishlistIcon.innerHTML = wishlist.includes(book.id) ? "❤️" : "🤍";
+    if (wishlist.includes(book.id)) wishlistIcon.classList.add("active");
+
+    wishlistIcon.onclick = () => toggleWishlist(book);
+
+    card.append(image, title, author, genre, id, wishlistIcon);
+    bookList.appendChild(card);
+  });
+}
+
 // Init
 fetchBooks();
