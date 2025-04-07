@@ -76,5 +76,17 @@ function renderPagination() {
   }
 }
 
+function toggleWishlist(book) {
+  const index = wishlist.indexOf(book.id);
+  if (index > -1) {
+    wishlist.splice(index, 1);
+  } else {
+    wishlist.push(book.id);
+  }
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  fetchBooks(currentPage);
+  renderWishlist();
+}
+
 // Init
 fetchBooks();
