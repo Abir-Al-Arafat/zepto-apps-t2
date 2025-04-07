@@ -88,5 +88,25 @@ function toggleWishlist(book) {
   renderWishlist();
 }
 
+function renderWishlist() {
+  wishlistContainer.innerHTML = "";
+  books
+    .filter((book) => wishlist.includes(book.id))
+    .forEach((book) => {
+      const card = document.createElement("div");
+      card.className = "book-card";
+      card.innerHTML = `
+      <img src="${book.formats["image/jpeg"]}" alt="${book.title}" />
+      <div class="book-title">${book.title}</div>
+      <div class="book-author">Author: ${
+        book.authors[0]?.name || "Unknown"
+      }</div>
+      <div class="book-genre">Genre: ${book.subjects[0] || "N/A"}</div>
+      <div class="book-id">ID: ${book.id}</div>
+    `;
+      wishlistContainer.appendChild(card);
+    });
+}
+
 // Init
 fetchBooks();
