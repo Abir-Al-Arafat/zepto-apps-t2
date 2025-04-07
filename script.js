@@ -108,5 +108,21 @@ function renderWishlist() {
     });
 }
 
+function populateGenres() {
+  const genres = new Set();
+  books.forEach((book) => {
+    if (book.subjects.length) {
+      genres.add(book.subjects[0]);
+    }
+  });
+  genreFilter.innerHTML = '<option value="">All Genres</option>';
+  genres.forEach((g) => {
+    const opt = document.createElement("option");
+    opt.value = g;
+    opt.textContent = g;
+    genreFilter.appendChild(opt);
+  });
+}
+
 // Init
 fetchBooks();
