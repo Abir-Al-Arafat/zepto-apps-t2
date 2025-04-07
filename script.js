@@ -62,5 +62,19 @@ function renderBooks(bookArray) {
   });
 }
 
+function renderPagination() {
+  pagination.innerHTML = "";
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    if (i === currentPage) btn.style.backgroundColor = "#555";
+    btn.onclick = () => {
+      currentPage = i;
+      fetchBooks(currentPage);
+    };
+    pagination.appendChild(btn);
+  }
+}
+
 // Init
 fetchBooks();
