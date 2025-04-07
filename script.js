@@ -1,5 +1,3 @@
-// script.js
-
 const bookList = document.getElementById("book-list");
 const wishlistContainer = document.getElementById("wishlist");
 const searchInput = document.getElementById("search-input");
