@@ -132,5 +132,13 @@ searchInput.addEventListener("input", () => {
   renderBooks(filtered);
 });
 
+genreFilter.addEventListener("change", () => {
+  const value = genreFilter.value;
+  const filtered = value
+    ? books.filter((book) => book.subjects[0] === value)
+    : books;
+  renderBooks(filtered);
+});
+
 // Init
 fetchBooks();
